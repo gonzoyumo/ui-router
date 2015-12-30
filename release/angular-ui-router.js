@@ -1,6 +1,6 @@
 /**
  * State-based routing for AngularJS
- * @version v0.2.15
+ * @version v0.2.15-dev-2015-12-30
  * @link http://angular-ui.github.com/
  * @license MIT License, http://www.opensource.org/licenses/MIT
  */
@@ -1014,7 +1014,11 @@ UrlMatcher.prototype.format = function (values) {
           if (isArray(encoded)) {
             result += map(encoded, encodeDashes).join("-");
           } else {
-            result += encodeURIComponent(encoded);
+            if (param.type.raw) {
+              result += encoded;
+            } else {
+              result += encodeURIComponent(encoded);
+            }
           }
         }
         result += nextSegment;
